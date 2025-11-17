@@ -34,7 +34,7 @@ def carregar_modelo():
 model = carregar_modelo()
 
 # Título do Dashboard
-st.title('Previsão do Tempo com IA: Fusão de Dados de API e Visão de Satélite')
+st.title('Previsão do Tempo com IA: Grafos e Visão de Satélite')
 
 # --- ENTRADA DE DADOS DO USUÁRIO ---
 st.header("Faça uma Previsão")
@@ -88,6 +88,8 @@ if model is not None and st.button("Prever Temperatura de Amanhã"):
                 st.warning("Certifique-se de que você baixou a imagem e a salvou na mesma pasta do app.py.")
             except Exception as e:
                 st.error(f"Erro ao carregar ou processar a imagem local: {e}")
+
+            #PRECISO CORRIGIR NOVAMENTE PARA ADICIONAR IMAGEM DINAMICA!
 
         else:
             st.error(f"Não foi possível encontrar a cidade: {response.get('message', 'Erro desconhecido')}")
