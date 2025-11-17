@@ -67,9 +67,12 @@ if __name__ == "__main__":
         
     train_size = int(0.8 * len(graph_snapshots))
     test_size = len(graph_snapshots) - train_size
-    # ... (código de divisão de treino/teste sem mudanças)
-    train_dataset, test_dataset = random_split(graph_snapshots, [train_size, test_size])
-
+    # ... (código de divisão de treino/teste)
+    # Define um gerador com uma semente fixa 
+    generator = torch.Generator().manual_seed(42)
+    # Passa o gerador para a função de split
+    train_dataset, test_dataset = random_split(graph_snapshots, [train_size, test_size], generator=generator)
+    
     # --- MUDANÇA SUTIL: O NÚMERO DE FEATURES É AGORA DINÂMICO ---
     num_features = graph_snapshots[0].num_node_features
     print(f"\nO modelo será treinado com {num_features} features de entrada por dia.")
