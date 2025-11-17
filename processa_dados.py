@@ -2,6 +2,7 @@ import pandas as pd
 import torch
 from torchvision import models, transforms
 from PIL import Image
+import streamlit as st
 import networkx as nx
 
 # VISÃO COMPUTACIONAL
