@@ -3,7 +3,6 @@ import torch
 from torchvision import models, transforms
 from PIL import Image
 import networkx as nx
-import streamlit as st  # <-- IMPORTADO PARA O CACHE
 
 # VISÃO COMPUTACIONAL
 
