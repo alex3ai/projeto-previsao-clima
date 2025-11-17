@@ -55,7 +55,7 @@ if __name__ == "__main__":
         # -------------------------------------------------------------
         
         x = torch.tensor([node_features_list], dtype=torch.float)
-        y = torch.tensor([float(row['tavg_amanha'])], dtype=torch.float)
+        y = torch.tensor([[float(row['tavg_amanha'])]], dtype=torch.float)
         graph_snapshots.append(Data(x=x, edge_index=edge_index, y=y))
 
     # O resto do script permanece praticamente o mesmo...
