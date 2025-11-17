@@ -79,24 +79,42 @@ if __name__ == "__main__":
     optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
     criterion = torch.nn.MSELoss()
 
-    # Loop de Treinamento e Avaliação (sem mudanças)
+    # Loop de Treinamento e Avaliação
     print("Iniciando o treinamento do modelo...")
-    for epoch in range(100):
-        # ... (loop de treino)
-        pass # Apenas para encurtar, o seu código original aqui está perfeito
+    model.train() # Coloca o modelo em modo de treinamento
 
+    for epoch in range(100): # 100 épocas de treino
+        total_loss = 0
+        for data in train_dataset:
+            optimizer.zero_grad()       # Limpa os gradientes
+            
+            output = model(data)        # Faz a previsão
+            loss = criterion(output, data.y) # Calcula o erro (loss)
+            
+            loss.backward()             # Calcula os gradientes (backpropagation)
+            optimizer.step()            # Atualiza os pesos do modelo
+            
+            total_loss += loss.item()
+        
+        # Imprime o erro médio da época
+        if (epoch + 1) % 10 == 0:
+            print(f"Época {epoch+1:03d} | Erro Médio (Loss): {total_loss / len(train_dataset):.4f}")
+
+    print("Treinamento concluído.")
+    
+    # Salva o modelo TREINADO
     torch.save(model.state_dict(), 'modelo_clima.pth')
-    print("\nModelo treinado e salvo em 'modelo_clima.pth'")
+    print(f"\nModelo treinado e salvo em 'modelo_clima.pth'")
 
-    # AVALIAÇÃO DO MODELO NO CONJUNTO DE TESTE
+    # --- AVALIAÇÃO DO MODELO NO CONJUNTO DE TESTE ---
     
     print("\nIniciando avaliação no conjunto de teste...")
-    model.eval()  # Coloca o modelo em modo de avaliação (desliga dropout, etc.)
+    model.eval()  # Coloca o modelo em modo de avaliação
 
     y_true_teste = []  # Lista para as temperaturas reais
     y_pred_teste = []  # Lista para as previsões do modelo
 
-    with torch.no_grad():  # Desliga o cálculo de gradientes (economiza memória)
+    with torch.no_grad():  # Desliga o cálculo de gradientes
         for data in test_dataset:
             previsao = model(data)
             
