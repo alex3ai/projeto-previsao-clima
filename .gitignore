@@ -1,0 +1,18 @@
+# Ambiente virtual
+venv/
+/venv/
+ma/venv/
+
+# Cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos gerados (Dados e Modelos)
+# (Veja a nota abaixo sobre isso!)
+*.pkl
+*.pth
+
+# Arquivos temporários
+temp_image.png'
